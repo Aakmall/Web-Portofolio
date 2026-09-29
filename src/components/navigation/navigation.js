@@ -1,10 +1,21 @@
-export function initNavigation() {
+﻿export function initNavigation() {
+  const navbar = document.querySelector('.navbar');
   const sections = [...document.querySelectorAll('.section')];
   const navItems = document.querySelectorAll('.nav-item');
   let scheduled = false;
+  let navigationHeight = navbar.offsetHeight;
+
+  // Keep anchor headings below the menu, including its two-row mobile layout.
+  function updateNavigationHeight() {
+    navigationHeight = navbar.offsetHeight;
+    document.documentElement.style.scrollPaddingTop = `${navigationHeight + 20}px`;
+    updateActiveNav();
+  }
+
   function updateActiveNav() {
-    const position = window.scrollY + 150;
-    const current = [...sections].reverse().find(section => section.offsetTop <= position) || sections[0];
+    navbar.classList.toggle('is-scrolled', window.scrollY > 0);
+    const position = window.scrollY + navigationHeight + 24;
+    const current = [...sections].reverse().find(section => section.getBoundingClientRect().top + window.scrollY <= position) || sections[0];
     navItems.forEach(link => {
       const active = link.hash === `#${current.id}`;
       link.classList.toggle('active', active);
@@ -13,9 +24,13 @@ export function initNavigation() {
     });
     scheduled = false;
   }
+
   window.addEventListener('scroll', () => {
-    if (!scheduled) { scheduled = true; requestAnimationFrame(updateActiveNav); }
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(updateActiveNav);
+    }
   }, { passive: true });
-  window.addEventListener('resize', updateActiveNav);
-  updateActiveNav();
+  new ResizeObserver(updateNavigationHeight).observe(navbar);
+  updateNavigationHeight();
 }
