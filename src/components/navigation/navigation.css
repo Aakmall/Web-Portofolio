@@ -8,12 +8,17 @@
   align-items: center;
   gap: 24px;
   min-height: 77px;
-  padding: 18px 4.5%;
+  /* Match the centered 1440px main container and hero's 3.5% inset.
+     50.4px = 3.5% of 1440px. */
+  padding-block: 18px;
+  padding-inline: max(3.5%, calc((100% - 1440px) / 2 + 50.4px));
   background: transparent;
   border-bottom: 1px solid #ffffff18;
   isolation: isolate;
 }
-.navbar.is-scrolled { background: #090909; }
+.navbar.is-scrolled {
+  background: #090909;
+}
 .navbar .logo {
   display: inline-flex;
   align-items: center;
@@ -22,11 +27,18 @@
   color: #eee;
   font-size: 15px;
   font-weight: 800;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   white-space: nowrap;
 }
-.navbar .logo svg { flex-shrink: 0; color: #e42e3b; }
-.nav-links { display: flex; align-items: center; gap: 28px; }
+.navbar .logo svg {
+  flex-shrink: 0;
+  color: #e42e3b;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
 .navbar .nav-item {
   display: inline-flex;
   align-items: center;
@@ -35,10 +47,14 @@
   font-size: 13px;
   font-weight: 400;
   text-decoration: none;
-  transition: color .18s ease;
+  transition: color 0.18s ease;
 }
-.navbar .nav-item:hover { color: #fff; }
-.navbar .nav-item.active { color: #e42e3b; }
+.navbar .nav-item:hover {
+  color: #fff;
+}
+.navbar .nav-item.active {
+  color: #e42e3b;
+}
 .navbar .btn-connect {
   display: inline-flex;
   align-items: center;
@@ -53,14 +69,40 @@
   font-size: 11px;
   font-weight: 500;
   white-space: nowrap;
-  transition: border-color .18s ease, background .18s ease;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
 }
-.navbar .btn-connect:hover { border-color: #e42e3b; background: #e42e3b18; color: #fff; }
-.navbar a:focus-visible { outline: 2px solid #e42e3b; outline-offset: 5px; }
+.navbar .btn-connect:hover {
+  border-color: #e42e3b;
+  background: #e42e3b18;
+  color: #fff;
+}
+.navbar a:focus-visible {
+  outline: 2px solid #e42e3b;
+  outline-offset: 5px;
+}
 @media (max-width: 700px) {
-  .navbar { grid-template-columns: 1fr auto; gap: 8px; padding: 12px 5%; }
-  .nav-links { grid-column: 1 / -1; grid-row: 2; justify-content: space-between; gap: 12px; }
-  .navbar .nav-item { font-size: 12px; }
-  .navbar .logo { font-size: 14px; }
+  .navbar {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 12px 5%;
+  }
+  .nav-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .navbar .nav-item {
+    font-size: 12px;
+  }
+  .navbar .logo {
+    font-size: 14px;
+  }
 }
-@media (prefers-reduced-motion: reduce) { .navbar a { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .navbar a {
+    transition: none;
+  }
+}
