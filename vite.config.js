@@ -5,6 +5,9 @@ import { resolve } from 'node:path';
 // Assemble section partials into real HTML in both dev and production.
 export default defineConfig({
   base: './',
+  build: {
+    rollupOptions: { input: { portfolio: resolve('index.html'), cv: resolve('cv.html') } },
+  },
   plugins: [{
     name: 'section-html-includes',
     transformIndexHtml: {

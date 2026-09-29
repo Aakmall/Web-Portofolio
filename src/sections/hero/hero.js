@@ -1,4 +1,7 @@
-export function initHero() {
-  // Include the existing CV file in both development and production builds.
-  document.getElementById("hero-cv").href = new URL("../../assets/documents/CV no fix.docx", import.meta.url).href;
+﻿export function initHero() {
+  // Open the website CV page in the current tab, without downloading a document.
+  const link = document.getElementById('hero-cv');
+  link.href = new URL('./cv.html', document.baseURI).href;
+  link.removeAttribute('target');
+  link.removeAttribute('download');
 }

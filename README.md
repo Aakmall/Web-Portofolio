@@ -52,3 +52,7 @@ Vite menyatukan partial HTML melalui vite.config.js, sehingga HTML produksi teta
 ## Preview melalui Live Server
 
 Live Server dapat membuka index.html di root proyek. src/main.js memuat partial HTML sebelum menjalankan fungsi komponen. Vite tetap disarankan melalui npm run dev. Jangan membuka halaman melalui file:// karena modul dan fetch memerlukan server HTTP.
+
+## Halaman CV
+
+Tombol View CV membuka cv.html di tab yang sama. Edit konten CV di cv.html, tampilannya di src/pages/cv/cv.css, dan tautan unduhan CV di src/pages/cv/cv.js. Dokumen asli tetap disimpan di src/assets/documents/. Halaman web tidak otomatis tersinkron dengan dokumen Word.
