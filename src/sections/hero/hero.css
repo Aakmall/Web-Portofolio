@@ -398,3 +398,8 @@
     font-size: 14px;
   }
 }
+
+/* Scroll fade multiplies the existing --name-opacity; 1 = visible, 0 = hidden. */
+.hero-name {
+  opacity: var(--name-scroll-opacity, 1);
+}

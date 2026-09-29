@@ -1,0 +1,59 @@
+﻿/* Hover reading surfaces are limited to Services and Work. */
+:root {
+  --reading-card-background: rgb(8 8 12 / 10%);
+}
+
+:is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article) {
+  position: relative;
+  isolation: isolate;
+}
+
+:is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article)::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  z-index: -1;
+  border: none;
+  border-radius: 12px;
+  background: var(--reading-card-background);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  -webkit-mask-image: linear-gradient(transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  mask-image: linear-gradient(transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  :is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article)::before {
+    inset: -7px;
+  }
+}
+
+/* Preserve the existing borderless layout, independently of hover effects. */
+.glass-card,
+.project-card,
+.project-preview,
+.project-preview:hover,
+.project-details > article,
+.credentials-column,
+.process-column,
+.quote-column {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article):hover::before {
+    opacity: 1;
+  }
+}
+:is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article):focus-within::before {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.services-section .glass-card, .work-section .project-card, .work-section .project-details > article)::before {
+    transition: none;
+  }
+}
