@@ -1,0 +1,104 @@
+/* Styles for navigation; includes its responsive rules. */
+.navbar {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 22px 5%;
+
+  border-bottom: 1px solid var(--line);
+
+  background: #090909;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+.logo {
+  display: flex;
+
+  gap: 10px;
+
+  align-items: center;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.logo svg {
+  color: var(--red);
+}
+
+.nav-links {
+  display: flex;
+
+  gap: 30px;
+
+  font-size: 12px;
+}
+
+.nav-item {
+  color: var(--muted);
+}
+
+.nav-item.active {
+  color: var(--red);
+}
+
+.btn-connect {
+  display: inline-block;
+
+  border: 1px solid var(--red);
+
+  padding: 12px 20px;
+
+  font-size: 12px;
+}
+
+@media (max-width:640px) {
+  .navbar {
+    padding: 16px 5%;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+  }
+}
+
+@media (max-width:640px) {
+  .logo {
+    font-size: 14px;
+  }
+}
+
+@media (max-width:640px) {
+  .btn-connect {
+    padding: 8px 12px;
+
+    font-size: 10px;
+  }
+}
+
+@media (max-width:640px) {
+  .nav-links {
+    order: 3;
+
+    width: 100%;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    font-size: 11px;
+  }
+}
+
+.navbar {
+  background: transparent;
+}

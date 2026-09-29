@@ -1,0 +1,380 @@
+/* Styles for contact; includes its responsive rules. */
+.contact-section {
+  display: grid;
+
+  grid-template-columns: .8fr 1.5fr;
+
+  gap: 25px;
+
+  overflow: hidden;
+
+  padding-top: 35px;
+
+  padding-bottom: 30px;
+}
+
+.contact-content h2 {
+  font-size: 30px;
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.status-dot {
+  display: inline-block;
+
+  width: 9px;
+
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: var(--red);
+
+  vertical-align: middle;
+}
+
+.contact-content>p {
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: #aaa;
+
+  margin-top: 16px;
+}
+
+.contact-list {
+  list-style: none;
+
+  margin-top: 20px;
+}
+
+.contact-list li {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  font-size: 12px;
+
+  margin: 10px 0;
+
+  color: #aaa;
+}
+
+.contact-list li>span:first-child {
+  color: var(--red);
+
+  width: 18px;
+
+  font-size: 21px;
+}
+
+.contact-cta {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 20px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+.contact-cta>span {
+  border: 1px solid var(--red);
+
+  color: var(--red);
+
+  border-radius: 50%;
+
+  width: 43px;
+
+  height: 43px;
+
+  display: grid;
+
+  place-items: center;
+
+  font-size: 32px;
+}
+
+.workspace-art {
+  position: relative;
+
+  min-height: 340px;
+
+  align-self: end;
+}
+
+.laptop {
+  position: absolute;
+
+  width: 77%;
+
+  right: 0;
+
+  bottom: 25px;
+
+  transform: rotate(4deg);
+}
+
+.laptop-screen {
+  border: 3px solid #555;
+
+  border-radius: 12px 12px 3px 3px;
+
+  padding: 20px;
+
+  background: #101010;
+
+  box-shadow: 0 0 0 5px #151515;
+}
+
+.screen-nav {
+  font-size: 7px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.screen-nav b {
+  color: var(--red);
+
+  font-size: 15px;
+}
+
+.screen-nav>span {
+  margin-left: auto;
+
+  font-size: 5px;
+
+  color: #888;
+}
+
+.screen-body {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin: 30px 0;
+}
+
+.screen-body>strong {
+  font-size: clamp(16px,2.5vw,34px);
+
+  line-height: 1.05;
+
+  letter-spacing: -1px;
+}
+
+.screen-body strong span {
+  color: var(--red);
+}
+
+.code-window {
+  background: #250b0d;
+
+  border: 1px solid #4a181d;
+
+  padding: 12px;
+
+  color: #b7777a;
+
+  font: 8px/1.8 monospace;
+
+  flex: 1;
+}
+
+.code-window b {
+  color: var(--red);
+}
+
+.screen-footer {
+  font-size: 5px;
+
+  letter-spacing: 1px;
+
+  color: #888;
+}
+
+.laptop-base {
+  height: 22px;
+
+  background: #424242;
+
+  clip-path: polygon(0 0,100% 0,110% 70%,90% 100%,-12% 100%);
+
+  border-radius: 0 0 35% 25%;
+
+  margin: 0 -20px;
+}
+
+.desk-phone {
+  position: absolute;
+
+  bottom: 46px;
+
+  left: 7%;
+
+  width: 66px;
+
+  height: 140px;
+
+  border: 3px solid #494949;
+
+  background: #111;
+
+  border-radius: 10px;
+
+  transform: rotate(-12deg);
+
+  padding: 12px 8px;
+}
+
+.desk-phone span {
+  color: var(--red);
+
+  font-weight: 700;
+}
+
+.desk-phone i {
+  display: block;
+
+  height: 14px;
+
+  background: #262626;
+
+  border-left: 2px solid #99212a;
+
+  margin-top: 8px;
+}
+
+.desk-mug {
+  position: absolute;
+
+  bottom: 20px;
+
+  left: 0;
+
+  width: 65px;
+
+  height: 80px;
+
+  border: 2px solid #363636;
+
+  border-radius: 10% 10% 30% 30%;
+
+  background: #111;
+
+  color: var(--red);
+
+  font-size: 38px;
+
+  text-align: center;
+
+  padding-top: 15px;
+
+  z-index: 2;
+}
+
+.desk-mug:before {
+  content: '';
+
+  position: absolute;
+
+  border: 5px solid #333;
+
+  border-radius: 50%;
+
+  width: 22px;
+
+  height: 35px;
+
+  left: -24px;
+
+  top: 12px;
+}
+
+@media (max-width:1000px) {
+  .contact-section {
+    grid-template-columns: 1fr 1.3fr;
+  }
+}
+
+@media (max-width:1000px) {
+  .code-window {
+    display: none;
+  }
+}
+
+@media (max-width:1000px) {
+  .workspace-art {
+    min-height: 290px;
+  }
+}
+
+@media (max-width:1000px) {
+  .laptop {
+    width: 80%;
+  }
+}
+
+@media (max-width:1000px) {
+  .screen-body>strong {
+    font-size: 28px;
+  }
+}
+
+@media (max-width:640px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+
+    gap: 5px;
+  }
+}
+
+@media (max-width:640px) {
+  .workspace-art {
+    min-height: 290px;
+
+    margin-top: 10px;
+  }
+}
+
+@media (max-width:640px) {
+  .laptop {
+    width: 77%;
+  }
+}
+
+@media (max-width:640px) {
+  .screen-body>strong {
+    font-size: 25px;
+  }
+}
+
+@media (max-width:640px) {
+  .laptop-screen {
+    padding: 16px;
+  }
+}
+
+@media (max-width:640px) {
+  .contact-list li {
+    font-size: 12px;
+  }
+}

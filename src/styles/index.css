@@ -1,0 +1,9 @@
+@import "./global.css";
+@import "../../src/components/navigation/navigation.css";
+@import "../../src/sections/hero/hero.css";
+@import "../../src/sections/services/services.css";
+@import "../../src/sections/work/work.css";
+@import "../../src/sections/about/about.css";
+@import "../../src/sections/contact/contact.css";
+@import "../../src/components/footer/footer.css";
+@import "../../src/components/background/background.css";

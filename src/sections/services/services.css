@@ -1,0 +1,96 @@
+/* Styles for services; includes its responsive rules. */
+.section-header {
+  max-width: 680px;
+
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 30px;
+
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+}
+
+.cards-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4,1fr);
+
+  gap: 28px;
+}
+
+.glass-card {
+  border-top: 1px solid var(--line);
+
+  padding-top: 20px;
+}
+
+.card-number {
+  color: var(--red);
+
+  margin-bottom: 16px;
+}
+
+.glass-card h3 {
+  font-size: 17px;
+
+  margin-bottom: 12px;
+}
+
+.glass-card p {
+  font-size: 12px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+}
+
+.card-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.card-tags span {
+  font-size: 9px;
+
+  border: 1px solid var(--line);
+
+  padding: 5px;
+}
+
+@media (max-width:1000px) {
+  .cards-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width:640px) {
+  .cards-grid {
+    gap: 24px 18px;
+  }
+}
+
+@media (max-width:640px) {
+  .glass-card h3 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width:640px) {
+  .section-title {
+    font-size: 25px;
+  }
+}
