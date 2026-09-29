@@ -378,3 +378,9 @@
     font-size: 12px;
   }
 }
+
+/* Supporting text readability */
+.contact-content > p { font-size: 15px; line-height: 1.7; }
+.contact-list li { font-size: 14px; overflow-wrap: anywhere; }
+.contact-list li > a, .contact-list li > span:last-child { min-width: 0; }
+.contact-cta { font-size: 12px; }

@@ -22,3 +22,6 @@
 .site-footer {
   background: transparent;
 }
+
+/* Supporting text readability */
+.site-footer { font-size: 12px; }

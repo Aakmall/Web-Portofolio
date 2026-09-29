@@ -393,3 +393,8 @@
     font-size: 18px;
   }
 }
+
+/* Supporting text readability */
+.text-link { font-size: 12px; }
+.project-card > p { font-size: 13px; line-height: 1.6; }
+.project-details p { font-size: 15px; line-height: 1.7; }

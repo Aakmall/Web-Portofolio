@@ -106,3 +106,8 @@
     transition: none;
   }
 }
+
+/* Supporting text readability */
+.navbar .nav-item { font-size: 14px; }
+.navbar .btn-connect { font-size: 13px; }
+@media (max-width: 700px) { .navbar .nav-item { font-size: 13px; } }

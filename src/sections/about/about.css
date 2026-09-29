@@ -290,3 +290,9 @@
 .quote-column {
   background: transparent;
 }
+
+/* Supporting text readability */
+.small-heading, .process-list h3 { font-size: 13px; }
+.education-list li, .process-list p { font-size: 14px; line-height: 1.6; }
+.skills-cluster span { font-size: 11px; }
+.quote-column figcaption { font-size: 13px; }
