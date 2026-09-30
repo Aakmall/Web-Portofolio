@@ -1,85 +1,15 @@
-<section class="section work-section" id="work">
+﻿<section class="section work-section" id="work" aria-labelledby="work-title">
   <div class="work-heading">
-    <h2>SELECTED PROJECTS</h2>
-    <button class="text-link" id="view-projects" aria-expanded="false" aria-controls="project-details">VIEW ALL PROJECTS <span>&#8599;</span>
-  </button>
-</div>
-<div class="projects-grid">
-  <article class="project-card">
-    <a class="project-preview preview-tech" href="#project-01" data-project="project-01" aria-label="View PAYMENT GATEWAY">
-    <span class="project-number">01</span>
-    <div class="mini-nav">AKMAL / TECH <span>EXPLORE</span>
+    <h2 id="work-title">SELECTED PROJECTS</h2>
+    <a class="text-link" href="https://github.com/Aakmall" target="_blank" rel="noopener noreferrer">GITHUB PROFILE &nearr;</a>
   </div>
-  <div class="preview-content">
-    <strong>INNOVATIVE<br>DIGITAL<br>SOLUTIONS</strong>
-    <div class="preview-art" aria-hidden="true">
-      <i>
-    </i>
-    <i>
-  </i>
-  <i>
-</i>
-</div>
-</div>
-<span class="mini-caption">DESIGNED WITH PURPOSE. BUILT TO SCALE.</span>
-</a>
-<h3>PAYMENT GATEWAY</h3>
-<p>BACKEND / API DEVELOPMENT</p>
-</article>
-<article class="project-card">
-  <a class="project-preview preview-commerce" href="#project-02" data-project="project-02" aria-label="View URBAN COMMERCE">
-  <span class="project-number">02</span>
-  <div class="mini-nav">AKMAL / COMMERCE <span>EXPLORE</span>
-</div>
-<div class="preview-content">
-  <strong>Summer<br>Collection<br>2026</strong>
-  <div class="preview-art" aria-hidden="true">
-    <b>U</b>
-    <span>EVERYDAY<br>ESSENTIALS</span>
+  <div class="projects-grid" id="projects-list" role="region" aria-label="Project carousel" tabindex="0"></div>
+  <div class="project-controls">
+    <span id="project-position" aria-live="polite"></span>
+    <div class="project-arrows">
+      <button id="projects-prev" type="button" aria-label="Previous project" aria-controls="projects-list">&larr;</button>
+      <button id="projects-next" type="button" aria-label="Next project" aria-controls="projects-list">&rarr;</button>
+    </div>
   </div>
-</div>
-<span class="mini-caption">DESIGNED WITH PURPOSE. BUILT TO SCALE.</span>
-</a>
-<h3>URBAN COMMERCE</h3>
-<p>E-COMMERCE / CONCEPT</p>
-</article>
-<article class="project-card">
-  <a class="project-preview preview-studio" href="#project-03" data-project="project-03" aria-label="View REALTIME PLATFORM">
-  <span class="project-number">03</span>
-  <div class="mini-nav">AKMAL / STUDIO <span>EXPLORE</span>
-</div>
-<div class="preview-content">
-  <strong>We Build<br>Digital Products<br>That Scale.</strong>
-  <div class="preview-art" aria-hidden="true">
-    <span>LIVE ACTIVITY</span>
-    <i>
-  </i>
-  <i>
-</i>
-<b>100M+</b>
-</div>
-</div>
-<span class="mini-caption">DESIGNED WITH PURPOSE. BUILT TO SCALE.</span>
-</a>
-<h3>REALTIME PLATFORM</h3>
-<p>EVENT STREAMING</p>
-</article>
-</div>
-<div id="project-details" class="project-details" hidden>
-  <article id="project-01">
-    <span class="section-tag">PROJECT / 01</span>
-    <h3>PAYMENT GATEWAY</h3>
-    <p>Secure, idempotent payment workflows and resilient transaction processing.</p>
-  </article>
-  <article id="project-02">
-    <span class="section-tag">PROJECT / 02</span>
-    <h3>URBAN COMMERCE</h3>
-    <p>A system concept for product catalogs, inventory, checkout, and order management.</p>
-  </article>
-  <article id="project-03">
-    <span class="section-tag">PROJECT / 03</span>
-    <h3>REALTIME PLATFORM</h3>
-    <p>Distributed event pipelines connecting telemetry to live analytics through WebSockets.</p>
-  </article>
-</div>
+  <noscript>Enable JavaScript to view the project gallery.</noscript>
 </section>

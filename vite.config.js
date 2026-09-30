@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 export default defineConfig({
   base: './',
   build: {
-    rollupOptions: { input: { portfolio: resolve('index.html'), cv: resolve('cv.html') } },
+    rollupOptions: { input: { portfolio: resolve('index.html'), cv: resolve('cv.html'), project: resolve('project.html') } },
   },
   plugins: [{
     name: 'section-html-includes',

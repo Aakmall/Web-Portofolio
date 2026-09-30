@@ -56,3 +56,39 @@ Live Server dapat membuka index.html di root proyek. src/main.js memuat partial 
 ## Halaman CV
 
 Tombol View CV membuka cv.html di tab yang sama. Edit konten CV di cv.html, tampilannya di src/pages/cv/cv.css, dan tautan unduhan CV di src/pages/cv/cv.js. Dokumen asli tetap disimpan di src/assets/documents/. Halaman web tidak otomatis tersinkron dengan dokumen Word.
+
+## Mengubah proyek (satu sumber data)
+
+Edit **src/data/projects.js** untuk judul, kategori, periode, deskripsi, fitur, tags, tautan, dan gambar. Renderer berada di src/sections/work/work.js; layout berada di work.css.
+
+- published: true menampilkan proyek; false menyimpan draft tersembunyi. Tiga proyek lainnya masih draft kosong.
+- description: ringkasan proyek. features: daftar fitur di detail yang bisa dibuka.
+- images: urutan galeri; setiap gambar memiliki src, alt, caption.
+- Simpan screenshot di public/images/projects/ai-coding-assistant/home.png dan editor.png. File public disalin Vite ke dist tanpa mengubah namanya.
+- Gunakan path images/projects/... di data, tanpa awalan public/. Format JPG/WebP juga boleh; sesuaikan ekstensi di src.
+- links.demo dan links.repository: biarkan kosong bila belum tersedia. Tombol hanya muncul setelah URL diisi.
+- Klik screenshot untuk membukanya dalam ukuran penuh. Gambar dimuat secara lazy.
+- Data proyek yang belum dipublikasikan tidak ditampilkan, tetapi tetap ada di source publik; jangan menaruh informasi rahasia.
+
+Konten pendidikan dan skills berada di about.html, kontak di contact.html, kemampuan di services.html. IPK belum ditampilkan karena dokumen CV mencantumkan dua nilai berbeda.
+
+## Slider proyek dan View More
+
+Keempat proyek sekarang tampil. Desktop menampilkan 3 kartu, tablet 2, dan HP 1; gunakan panah atau geser horizontal. View More membuka deskripsi di dalam kartu dengan animasi.
+
+- Edit semua konten di src/data/projects.js. Gambar pertama (images[0]) menjadi sampul, gambar berikutnya muncul pada detail.
+- Screenshot skripsi: public/images/projects/ai-coding-assistant/unklab-aicode1.png dan unklab-aicode2.png.
+- Proyek dengan images: [] menampilkan Gambar belum ditambahkan; deskripsi kosong diberi penanda.
+- Isi links.repository dengan URL repository proyek. Selama kosong, tautan berlabel GitHub Profile menuju profil Aakmall.
+- Ukuran/jumlah kartu dan durasi animasi: src/sections/work/work.css. Interaksi slider dan View More: work.js.
+
+## Halaman detail proyek (terbaru)
+
+View Project kini membuka project.html?id=ID_PROYEK, bukan memperpanjang kartu. Slider tetap menampilkan 3 kartu desktop, 2 tablet, dan 1 mobile. Sampul pertama, nomor merah, judul, dan kategori mengikuti tampilan referensi.
+
+- Data bersama untuk kartu dan halaman detail: src/data/projects.js.
+- Tampilan kartu/slider: src/sections/work/work.css dan work.js.
+- Halaman detail: project.html, src/pages/project/project.js, dan project.css.
+- Gambar sampul menggunakan images[0]; halaman detail menampilkan semua gambar.
+- GitHub Repository muncul saat links.repository diisi; jika kosong, GitHub Profile tetap tersedia.
+- ID tidak ditemukan menampilkan pesan dengan tautan kembali ke daftar proyek.
