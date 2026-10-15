@@ -92,3 +92,5 @@ View Project kini membuka project.html?id=ID_PROYEK, bukan memperpanjang kartu. 
 - Gambar sampul menggunakan images[0]; halaman detail menampilkan semua gambar.
 - GitHub Repository muncul saat links.repository diisi; jika kosong, GitHub Profile tetap tersedia.
 - ID tidak ditemukan menampilkan pesan dengan tautan kembali ke daftar proyek.
+
+LOKASI : C:\PORTOFOLIO-WEB
