@@ -21,7 +21,6 @@ export const projects = [
     ],
     links: { demo: '', repository: '' },
   },
-  { id: 'stunting-care', published: true, title: 'Stunting-Care', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
   {
     id: 'jewelry-ecommerce',
     published: true,
@@ -47,7 +46,12 @@ export const projects = [
       { src: 'images/projects/e-commerce/Flamingo-HalamanAdmin.png', alt: 'FlamingoShop admin dashboard showing product, category, and out-of-stock statistics', caption: 'Admin Dashboard — Store statistics and access to product and category management.' },
       { src: 'images/projects/e-commerce/Flamingo-HalamanAdmin2.png', alt: 'FlamingoShop product management table with prices, stock, search, and edit or delete actions', caption: 'Product Management — Search and manage jewelry products, prices, stock, and categories.' },
     ],
-    links: { demo: '', repository: 'https://github.com/Aakmall' },
+    links: {
+      demo: '',
+      repository: 'https://github.com/Aakmall/project_backend_frontend_g4',
+      backendRepository: 'https://github.com/Aakmall/project_backend_g4',
+    },
   },
   { id: 'pharmacy-inventory', published: true, title: 'Manajemen Stok Apotek', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
+  { id: 'stunting-care', published: true, title: 'Stunting-Care', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
 ];

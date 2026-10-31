@@ -21,7 +21,9 @@ function renderProject(project) {
   header.append(element('p', 'eyebrow', project.category || 'PROJECT'), element('h1', '', project.title));
   if (project.period) header.append(element('p', 'period', project.period));
   const links = element('div', 'project-links');
-  links.append(externalLink(project.links.repository || 'https://github.com/Aakmall', project.links.repository ? 'GitHub Repository ↗' : 'GitHub Profile ↗'));
+  const repositoryLabel = project.links.backendRepository ? 'GitHub Frontend ↗' : 'GitHub Repository ↗';
+  links.append(externalLink(project.links.repository || 'https://github.com/Aakmall', project.links.repository ? repositoryLabel : 'GitHub Profile ↗'));
+  if (project.links.backendRepository) links.append(externalLink(project.links.backendRepository, 'GitHub Backend ↗'));
   if (project.links.demo) links.append(externalLink(project.links.demo, 'Live Demo ↗'));
   header.append(links);
 
