@@ -22,6 +22,8 @@ export const projects = [
     links: { demo: '', repository: '' },
   },
   { id: 'stunting-care', published: true, title: 'Stunting-Care', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
-  { id: 'jewelry-ecommerce', published: true, title: 'E-commerce Perhiasan', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
+  { id: 'jewelry-ecommerce', published: true, title: 'E-commerce Perhiasan', category: '', period: '', description: '', features: [], tags: [], images: [
+    { src: 'images/projects/e-commerce/Flamingo-KoleksiProduk1.png', alt: 'Halaman koleksi perhiasan FlamingoShop dengan banner cincin berlian', caption: 'Koleksi perhiasan FlamingoShop' },
+  ], links: { demo: '', repository: '' } },
   { id: 'pharmacy-inventory', published: true, title: 'Manajemen Stok Apotek', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
 ];
