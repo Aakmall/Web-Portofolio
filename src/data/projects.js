@@ -94,10 +94,10 @@ export const projects = [
     ],
     tags: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Tailwind CSS', 'Jenkins', 'Git'],
     images: [
+      { src: 'images/projects/inventory-apotek/Login.png', alt: 'ApoSmart login page with email and password fields and a registration link', caption: 'Login Page — User authentication interface for accessing the pharmacy inventory system.' },
       { src: 'images/projects/inventory-apotek/Dashboard.png', alt: 'ApoSmart dashboard with medicine inventory statistics, stock distribution chart, and low-stock and expiration alerts', caption: 'Dashboard — Overview of medicine inventory, stock levels, and expiration alerts.' },
       { src: 'images/projects/inventory-apotek/DaftarObat.png', alt: 'ApoSmart medicine inventory table with search, categories, pricing, stock availability, suppliers, and expiration dates', caption: 'Medicine Inventory — Medicine records with search, pricing, stock availability, and expiration dates.' },
       { src: 'images/projects/inventory-apotek/DaftarKategoriObat.png', alt: 'ApoSmart category management page with medicine counts, category search, and add, edit, and delete controls', caption: 'Category Management — Organize and manage medicines by category.' },
-      { src: 'images/projects/inventory-apotek/Login.png', alt: 'ApoSmart login page with email and password fields and a registration link', caption: 'Login Page — User authentication interface for accessing the pharmacy inventory system.' },
     ],
     links: { demo: '', repository: 'https://github.com/Aakmall/DevOpsFINAL' },
   },
