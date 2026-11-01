@@ -1,3 +1,3 @@
-// Resolve the reviewed CV document in development and production.
+// Resolve the final MagangHub CV in development and production.
 const downloadLink = document.getElementById('download-cv');
-downloadLink.href = new URL('../../assets/documents/CV-Akmal-Rizki-Anapu.docx', import.meta.url).href;
+downloadLink.href = new URL('../../assets/documents/CV_Akmal_Rizki_Anapu_MagangHub.docx', import.meta.url).href;
