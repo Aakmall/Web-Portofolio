@@ -101,5 +101,5 @@ export const projects = [
     ],
     links: { demo: '', repository: 'https://github.com/Aakmall/DevOpsFINAL' },
   },
-  { id: 'stunting-care', published: true, title: 'Stunting-Care', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
+  { id: 'stunting-care', published: false, title: 'Stunting-Care', category: '', period: '', description: '', features: [], tags: [], images: [], links: { demo: '', repository: '' } },
 ];
