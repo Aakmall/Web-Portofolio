@@ -1,5 +1,8 @@
 // Edit content here. published controls visibility; images[0] is the cover.
 // Images live in public/images/projects/; paths below are relative to the website root.
+// Optional presentation fields: summary, role, developmentStatus, technicalContributions,
+// technicalApproach, engineeringChallenges [{ title, challenge, approach }],
+// and technicalEvidence [{ label, url, description }]. Personal attribution requires confirmation.
 export const projects = [
   {
     id: 'ai-coding-assistant',
@@ -7,7 +10,27 @@ export const projects = [
     title: 'AI Coding Assistant',
     category: 'Undergraduate thesis',
     period: 'December 2025 - May 2026',
-    description: 'A browser-based Python coding platform with a notebook editor and an AI assistant. Developed as my undergraduate thesis project.',
+    summary: 'A Python notebook workspace with AI assistance for coding tasks.',
+    description: 'A browser-based Python coding workspace that brings a notebook editor and AI assistance into one interface. Developed as an undergraduate thesis project to support writing, understanding, and debugging Python code.',
+    role: 'Team thesis project — AI integration, Python execution, backend communication, and testing.',
+    developmentStatus: 'Concurrent-user login issues found during testing remain under evaluation; a resolution has not been confirmed.',
+    technicalContributions: [
+      'I integrated AI assistance for generating, explaining, and debugging code in the notebook workflow.',
+      'I contributed to browser-based Python execution and backend request/response handling, including session-related flows.',
+      'I carried out functional and multi-user testing to evaluate application behavior and identify login issues.',
+    ],
+    engineeringChallenges: [
+      {
+        title: 'Connecting AI responses to the code editor',
+        challenge: 'AI requests and responses needed to work alongside the notebook editing workflow.',
+        approach: 'I adjusted communication between the editor, backend, and AI service so requests and responses could be handled in the application interface.',
+      },
+      {
+        title: 'Investigating concurrent-user login failures',
+        challenge: 'During multi-user testing, some users could not log in concurrently.',
+        approach: 'I recorded the failures for further evaluation of authentication, session handling, and service limits. The root cause and final fix remain unconfirmed.',
+      },
+    ],
     features: [
       'Write and run Python in a notebook-style editor.',
       'Use AI assistance to generate, explain, and debug code.',
@@ -27,10 +50,36 @@ export const projects = [
     title: 'FlamingoShop — Jewelry E-Commerce Website',
     category: 'University Project',
     period: '2025',
-    description: 'FlamingoShop is a full-stack jewelry e-commerce website built with React, Java Spring Boot, and MySQL. Developed as a university project, it provides a shopping experience for customers and an administration dashboard for managing products, categories, and orders. The project focuses on REST API integration, database management, and responsive web design.',
+    summary: 'A jewelry storefront with a Java/Spring Boot catalog and order API.',
+    description: 'FlamingoShop combines a customer jewelry storefront and an administration workspace with a Java/Spring Boot and MySQL backend. This university project explores product browsing, catalog management, and order processing through a separate REST API.',
+    role: 'Team project — frontend, Java backend, database design, and API integration.',
+    developmentStatus: 'Frontend tests use isolated API responses. Full frontend–backend integration still requires runtime validation.',
+    technicalContributions: [
+      'I developed React interfaces for product browsing, the shopping cart, checkout, and the dashboard.',
+      'I developed Spring Boot controllers, services, and REST APIs, and designed MySQL tables and relationships.',
+      'I implemented registration and JWT-based login flows and connected React requests to the backend API.',
+      'I inspected endpoint responses and debugged data mapping, login responses, and token handling.',
+    ],
+    engineeringChallenges: [
+      {
+        title: 'Aligning product responses with the React interface',
+        challenge: 'Product data from the backend did not display correctly in the frontend.',
+        approach: 'I inspected API responses and adjusted data fetching and mapping. The current service layer normalizes DTO values and distinguishes empty results from connection or response errors.',
+      },
+      {
+        title: 'Debugging login and JWT communication',
+        challenge: 'Login responses and token use caused problems in frontend–backend communication.',
+        approach: 'I traced the authentication flow, inspected login responses, and checked how tokens were sent with API requests. The source includes JWT endpoints and Bearer-token handling; end-to-end behavior still needs runtime validation.',
+      },
+    ],
+    technicalEvidence: [
+      { label: 'API contract', url: 'https://github.com/Aakmall/project_backend_frontend_g4/blob/main/docs/API_CONTRACT.md', description: 'Endpoints, DTOs, error states, and integration boundaries.' },
+      { label: 'Java backend structure', url: 'https://github.com/Aakmall/project_backend_g4/tree/main/src/main/java/com/Project_backend/ProjectBackend', description: 'Controllers, services, repositories, and JPA data models.' },
+      { label: 'Frontend test source', url: 'https://github.com/Aakmall/project_backend_frontend_g4/tree/main/tests', description: 'Mapper, service, and browser tests with isolated API responses.' },
+    ],
     features: [
       'Browse jewelry products with search and category filtering.',
-      'Register and log in using role-based authentication.',
+      'Use customer and administrator login interfaces with JWT-based authentication endpoints.',
       'Add products to a shopping cart and place orders.',
       'Manage products, categories, and stock through an admin dashboard.',
       'Upload and manage product images using Base64 storage.',
@@ -58,16 +107,51 @@ export const projects = [
     title: 'POS-Zanna — Point of Sale & Inventory Management System',
     category: 'Status: In Development',
     period: 'Oktober 2026',
-    description: 'POS-Zanna merupakan aplikasi Point of Sale (POS) berbasis web yang dirancang untuk membantu digitalisasi operasional toko, mencakup pengelolaan transaksi penjualan, inventaris, pelanggan, piutang, serta laporan penjualan. Aplikasi ini dikembangkan dengan pendekatan offline-first menggunakan React, TypeScript, IndexedDB, dan Dexie.js agar aktivitas operasional tetap dapat dilakukan tanpa koneksi internet. Saat ini, pengembangan frontend dan berbagai fitur operasional utama telah diimplementasikan. Proyek masih dalam tahap pengembangan backend menggunakan Java Spring Boot dan PostgreSQL, dengan fokus pada REST API, keamanan, arsitektur sistem, dan persiapan integrasi frontend–backend. Development Status: Ongoing — Backend Development & System Integration.',
-    features: [
-      'Pengelolaan transaksi penjualan melalui antarmuka kasir.',
-      'Pengelolaan inventaris dan stok produk toko.',
-      'Pengelolaan data pelanggan dan piutang.',
-      'Dashboard operasional dan laporan penjualan.',
-      'Pendekatan offline-first dengan penyimpanan data lokal menggunakan IndexedDB dan Dexie.js.',
-      'Pengembangan backend Java Spring Boot dan PostgreSQL serta persiapan integrasi frontend–backend masih berlangsung.',
+    summary: 'An offline-first POS for store sales, stock, and customer balances.',
+    description: 'POS-Zanna is an offline-first web application for store sales, inventory, customers, receivables, and reporting. Its React and TypeScript frontend uses IndexedDB and Dexie.js to keep local operations available without an internet connection.',
+    role: 'Personal project — sole developer, using AI coding tools for development support.',
+    developmentStatus: 'In development. Java/Spring Boot backend development with PostgreSQL and frontend integration are ongoing; cross-device synchronization is not yet implemented.',
+    technicalContributions: [
+      'I designed and developed React/TypeScript workflows for products, inventory, sales, and reporting, with separate domain rules, services, and repositories.',
+      'I implemented local data storage with IndexedDB/Dexie and PWA support for asset caching, offline access, and application updates.',
+      'I implemented backup/restore, data import/export, validation, and atomic local restore operations.',
+      'I introduced lazy-loaded pages and adjusted imports to reduce the initial JavaScript load.',
+      'I manually tested and debugged operational workflows while continuing Spring Boot backend development.',
     ],
-    tags: ['React', 'TypeScript', 'Vite', 'IndexedDB', 'Dexie.js', 'Java', 'Spring Boot', 'PostgreSQL', 'Maven', 'Flyway'],
+    engineeringChallenges: [
+      {
+        title: 'Recording consistent offline transactions',
+        challenge: 'Store transactions needed to remain available without a connection and avoid duplicate sales or partial stock updates.',
+        approach: 'I used IndexedDB/Dexie for local operations. Checkout checks a persistent operation ID and commits sales, stock, and ledger changes in one local transaction; it does not provide cross-device synchronization.',
+      },
+      {
+        title: 'Preserving data integrity during restore',
+        challenge: 'An invalid backup or a failed restore could leave operational data incomplete.',
+        approach: 'I added validation and pre-restore checks. The repository replaces all tables within one Dexie transaction and verifies the result before committing.',
+      },
+      {
+        title: 'Reducing the initial JavaScript load',
+        challenge: 'A large initial bundle made frontend loading an optimization target.',
+        approach: 'I introduced React.lazy route imports and adjusted the import structure to load operational pages on demand.',
+      },
+    ],
+    technicalEvidence: [
+      { label: 'Frontend architecture and scope', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/README.md', description: 'Offline-first behavior, implemented modules, and current limitations.' },
+      { label: 'Local database schema', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/src/data/database.ts', description: 'Versioned Dexie tables and unique indexes for local operations.' },
+      { label: 'Checkout implementation', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/src/data/dexieCheckoutRepository.ts', description: 'Operation identity checks and the local transaction boundary.' },
+      { label: 'Checkout test source', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/scripts/checkout-service.test.ts', description: 'Service and repository scenarios using an isolated test database.' },
+      { label: 'Atomic backup/restore implementation', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/src/data/dexieBackupRepository.ts', description: 'Validation, pre-restore state checks, and a single replacement transaction.' },
+      { label: 'PWA runtime', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/src/pwa/pwaRuntime.ts', description: 'Service worker registration, offline readiness, and update handling.' },
+      { label: 'Lazy-loaded routes', url: 'https://github.com/Aakmall/POS-Zanna/blob/master/frontend/src/app/routes.tsx', description: 'Operational pages loaded through dynamic imports.' },
+    ],
+    features: [
+      'Record sales through a cashier interface with persisted receipts.',
+      'Manage products, inventory balances, and stock movement history.',
+      'Manage customers, receivables, and installment payments.',
+      'Review store activity through a dashboard and inventory reports.',
+      'Keep operational data locally using IndexedDB and Dexie.js.',
+    ],
+    tags: ['React', 'TypeScript', 'Vite', 'IndexedDB', 'Dexie.js', 'PWA', 'Java', 'Spring Boot', 'PostgreSQL', 'Maven', 'Flyway'],
     images: [
       { src: 'images/projects/POS_Zanna/Dashboard-operator.png', alt: 'Dashboard operator POS-Zanna dengan filter periode dan ringkasan penjualan, transaksi, uang diterima, serta piutang', caption: 'Dashboard Operator — Ringkasan operasional toko, penjualan, dan piutang.' },
       { src: 'images/projects/POS_Zanna/Beranda.png', alt: 'Beranda POS-Zanna dengan identitas Zanna-Cell dan akses untuk mengelola produk lokal serta membuka kasir', caption: 'Beranda — Pengenalan Zanna-Cell dan akses ke ruang kerja toko.' },
@@ -82,6 +166,32 @@ export const projects = [
     category: 'University Project',
     period: '2025',
     description: 'ApoSmart is a pharmacy inventory management web application built with React, TypeScript, and Supabase. Developed as a university project, it helps pharmacy staff manage medicine records, stock levels, categories, suppliers, and expiration dates. The project focuses on inventory monitoring, database integration, responsive interface development, and CI/CD pipeline configuration using Jenkins.',
+    summary: 'Medicine inventory monitoring with Supabase and Jenkins CI/CD configuration.',
+    role: 'Team project — frontend, authentication integration, Jenkins CI/CD, and server deployment.',
+    technicalContributions: [
+      'I developed the login, dashboard, inventory management, and reporting interfaces using React and TypeScript.',
+      'I integrated and configured Supabase authentication for user access.',
+      'I configured the Jenkinsfile and pipeline for dependency installation, builds, and SSH-based deployment.',
+      'I worked on server deployment and investigated build logs, environment settings, and deployment errors.',
+    ],
+    engineeringChallenges: [
+      {
+        title: 'Diagnosing Jenkins build and deployment failures',
+        challenge: 'Pipeline failures interrupted application builds or server deployment.',
+        approach: 'I reviewed pipeline logs, identified the failing stage, and adjusted the relevant build or deployment configuration. The Jenkinsfile is available; a recent successful pipeline run has not been independently verified.',
+      },
+      {
+        title: 'Providing environment settings during deployment',
+        challenge: 'Required application environment variables were not read correctly in the deployment environment.',
+        approach: 'I checked the environment configuration, adjusted the required variables, and repeated build/deployment checks. The Supabase client reads its URL and key from Vite build-time environment variables.',
+      },
+    ],
+    technicalEvidence: [
+      { label: 'Database schema and access policies', url: 'https://github.com/Aakmall/DevOpsFINAL/blob/main/supabase/schema.sql', description: 'Medicine, category, and supplier tables with policies for a shared pharmacy inventory.' },
+      { label: 'Authentication and session handling', url: 'https://github.com/Aakmall/DevOpsFINAL/blob/main/src/contexts/AuthContext.tsx', description: 'Supabase session changes and query cache invalidation.' },
+      { label: 'Automated test source', url: 'https://github.com/Aakmall/DevOpsFINAL/tree/main/tests', description: 'Inventory logic, authentication, and local preview test cases.' },
+      { label: 'Jenkins pipeline configuration', url: 'https://github.com/Aakmall/DevOpsFINAL/blob/main/Jenkinsfile', description: 'Build and SSH deployment stages; execution results are separate from this configuration.' },
+    ],
     features: [
       'Monitor medicine inventory, stock levels, and expiration dates through an interactive dashboard.',
       'Add, edit, delete, and search medicine records with pricing and stock information.',

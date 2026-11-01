@@ -18,6 +18,10 @@ h2 { font-size:22px; margin:0 0 18px; }
 .tags li { padding:5px 12px; border:1px solid #333; border-radius:4px; font-size:13px; }
 .features { padding-left:22px; }
 .features li { margin-bottom:10px; }
+.project-study { max-width:760px; margin-top:32px; color:#ccc; font-size:16px; }
+.project-study h3 { font-size:16px; margin:20px 0 8px; }
+.project-study p { margin:8px 0 12px; }
+.project-evidence-link { text-decoration:underline; text-underline-offset:4px; overflow-wrap:anywhere; }
 .gallery { margin-top:48px; border-top:1px solid #292929; padding-top:32px; }
 figure { margin:28px 0 40px; }
 .screenshot-link { display:block; }

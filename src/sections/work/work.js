@@ -30,6 +30,7 @@ function createProject(project, index) {
   cover.append(element('span', 'project-number', String(index + 1).padStart(2, '0')));
   const info = element('div', 'project-info');
   info.append(element('h3', '', project.title), element('p', 'project-category', project.category || 'Detail belum ditambahkan'));
+  if (project.summary) info.append(element('p', 'project-summary', project.summary));
   const link = element('a', 'project-view-link', 'View Project \u2197');
   link.href = url;
   info.append(link);

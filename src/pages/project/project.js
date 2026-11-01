@@ -15,6 +15,47 @@ function externalLink(url, label) {
   return link;
 }
 
+function listSection(title, items) {
+  if (!items?.length) return null;
+  const section = element('section', 'project-study');
+  const list = element('ul', 'features');
+  items.forEach(item => list.append(element('li', '', item)));
+  section.append(element('h2', '', title), list);
+  return section;
+}
+
+function challengesSection(challenges) {
+  const entries = challenges?.filter(item => item.title && item.challenge && item.approach);
+  if (!entries?.length) return null;
+  const section = element('section', 'project-study');
+  section.append(element('h2', '', 'Engineering Challenges'));
+  entries.forEach(item => {
+    const article = element('article');
+    const approach = element('p');
+    approach.append(element('strong', '', 'Approach: '), document.createTextNode(item.approach));
+    article.append(element('h3', '', item.title), element('p', '', item.challenge), approach);
+    section.append(article);
+  });
+  return section;
+}
+
+function evidenceSection(evidence) {
+  const entries = evidence?.filter(item => item.label && item.url);
+  if (!entries?.length) return null;
+  const section = element('section', 'project-study');
+  const list = element('ul', 'features');
+  entries.forEach(item => {
+    const row = element('li');
+    const link = externalLink(item.url, item.label + ' ↗');
+    link.className = 'project-evidence-link';
+    row.append(link);
+    if (item.description) row.append(element('p', '', item.description));
+    list.append(row);
+  });
+  section.append(element('h2', '', 'Technical Evidence'), list);
+  return section;
+}
+
 function renderProject(project) {
   document.title = project.title + ' | Akmal Rizki Anapu';
   const header = element('header', 'project-header');
@@ -29,6 +70,12 @@ function renderProject(project) {
 
   const overview = element('section', 'overview');
   overview.append(element('h2', '', 'About this project'), element('p', '', project.description || 'Deskripsi proyek belum ditambahkan.'));
+  if (project.role) overview.append(element('p', '', 'Role: ' + project.role));
+  if (project.developmentStatus) {
+    const status = element('p');
+    status.append(element('strong', '', 'Development status: '), document.createTextNode(project.developmentStatus));
+    overview.append(status);
+  }
   if (project.tags.length) {
     const tags = element('ul', 'tags');
     project.tags.forEach(tag => tags.append(element('li', '', tag)));
@@ -62,7 +109,15 @@ function renderProject(project) {
     figure.append(link, element('figcaption', '', image.caption));
     gallery.append(figure);
   });
-  return [header, overview, gallery];
+  return [
+    header,
+    overview,
+    listSection('Technical Contributions', project.technicalContributions),
+    listSection('Technical Approach', project.technicalApproach),
+    challengesSection(project.engineeringChallenges),
+    evidenceSection(project.technicalEvidence),
+    gallery,
+  ].filter(Boolean);
 }
 
 const id = new URLSearchParams(location.search).get('id');
