@@ -58,6 +58,15 @@ function evidenceSection(evidence) {
 
 function renderProject(project) {
   document.title = project.title + ' | Akmal Rizki Anapu';
+  const canonicalUrl = new URL('https://akmal-portfolioo.vercel.app/project.html');
+  canonicalUrl.searchParams.set('id', project.id);
+  const canonical = document.createElement('link');
+  canonical.rel = 'canonical';
+  canonical.href = canonicalUrl.href;
+  document.head.append(canonical);
+  document.querySelector('meta[property="og:url"]').content = canonicalUrl.href;
+  document.querySelector('meta[property="og:title"]').content = document.title;
+  document.querySelector('meta[name="twitter:title"]').content = document.title;
   const header = element('header', 'project-header');
   header.append(element('p', 'eyebrow', project.category || 'PROJECT'), element('h1', '', project.title));
   if (project.period) header.append(element('p', 'period', project.period));
@@ -126,6 +135,6 @@ const page = document.getElementById('project-page');
 if (project) {
   page.replaceChildren(...renderProject(project));
 } else {
-  document.title = 'Project not found | Akmal';
+  document.title = 'Project not found | Akmal Rizki Anapu';
   page.replaceChildren(element('h1', '', 'Project not found'), element('p', '', 'Kembali ke daftar proyek untuk memilih proyek yang tersedia.'));
 }
