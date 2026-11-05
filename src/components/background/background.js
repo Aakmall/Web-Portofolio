@@ -9,6 +9,7 @@ export function initBackground() {
   const canvas = document.getElementById('animation-canvas');
   const ctx = canvas.getContext('2d', { alpha: false });
   const frames = [];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let currentFrame = 0;
   let targetFrame = 0;
   let animationId = null;
@@ -30,9 +31,23 @@ export function initBackground() {
   }
   
   function syncBackgroundScroll() {
+    if (reducedMotion.matches) return;
     const distance = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     targetFrame = Math.max(0, Math.min(1, window.scrollY / distance)) * (frameUrls.length - 1);
     if (animationId === null) animationId = requestAnimationFrame(animateBackground);
+  }
+
+  function updateMotionPreference() {
+    if (reducedMotion.matches) {
+      if (animationId !== null) cancelAnimationFrame(animationId);
+      animationId = null;
+      // Keep the original opening portrait visible without scroll-driven motion.
+      currentFrame = 0;
+      targetFrame = 0;
+      drawFrame(0);
+    } else {
+      syncBackgroundScroll();
+    }
   }
   
   function resizeBackground() {
@@ -56,5 +71,6 @@ export function initBackground() {
   window.addEventListener('scroll', syncBackgroundScroll, { passive: true });
   window.addEventListener('resize', resizeBackground);
   new ResizeObserver(syncBackgroundScroll).observe(document.getElementById('scroll-container'));
+  reducedMotion.addEventListener('change', updateMotionPreference);
   resizeBackground();
 }
