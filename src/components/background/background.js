@@ -10,17 +10,26 @@ export function initBackground() {
   const ctx = canvas.getContext('2d', { alpha: false });
   const frames = [];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const compactViewport = window.matchMedia('(max-width: 1000px)');
   let currentFrame = 0;
   let targetFrame = 0;
   let animationId = null;
+  let lastDrawnFrame = null;
+
+  function isStatic() {
+    return reducedMotion.matches || compactViewport.matches;
+  }
   
   function drawFrame(index) {
-    const frame = frames[Math.max(0, Math.min(frameUrls.length - 1, Math.round(index)))];
+    const requestedFrame = frames[Math.max(0, Math.min(frameUrls.length - 1, Math.round(index)))];
+    // Keep the last available portrait while a requested frame is still loading.
+    const frame = requestedFrame?.complete && requestedFrame.naturalWidth ? requestedFrame : lastDrawnFrame;
     if (!frame || !frame.complete || !frame.naturalWidth) return;
     const scale = Math.max(canvas.width / frame.naturalWidth, canvas.height / frame.naturalHeight);
     const width = frame.naturalWidth * scale;
     const height = frame.naturalHeight * scale;
     ctx.drawImage(frame, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+    lastDrawnFrame = frame;
   }
   
   function animateBackground() {
@@ -31,17 +40,18 @@ export function initBackground() {
   }
   
   function syncBackgroundScroll() {
-    if (reducedMotion.matches) return;
+    if (isStatic()) return;
     const distance = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     targetFrame = Math.max(0, Math.min(1, window.scrollY / distance)) * (frameUrls.length - 1);
     if (animationId === null) animationId = requestAnimationFrame(animateBackground);
   }
 
-  function updateMotionPreference() {
-    if (reducedMotion.matches) {
+  function updateBackgroundMode() {
+    loadFramesForMode();
+    if (isStatic()) {
       if (animationId !== null) cancelAnimationFrame(animationId);
       animationId = null;
-      // Keep the original opening portrait visible without scroll-driven motion.
+      // Keep the opening portrait on compact viewports and with reduced motion.
       currentFrame = 0;
       targetFrame = 0;
       drawFrame(0);
@@ -52,25 +62,41 @@ export function initBackground() {
   
   function resizeBackground() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
+    // Compact CSS uses a stable large viewport height so mobile browser chrome
+    // does not rescale the portrait as its address bar expands or collapses.
+    const bounds = compactViewport.matches ? canvas.getBoundingClientRect() : null;
+    canvas.width = Math.floor((bounds?.width ?? window.innerWidth) * dpr);
+    canvas.height = Math.floor((bounds?.height ?? window.innerHeight) * dpr);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'high';
-    drawFrame(currentFrame);
+    drawFrame(isStatic() ? 0 : currentFrame);
     syncBackgroundScroll();
   }
   
-  frameUrls.forEach((url, index) => {
+  function loadFrame(index) {
+    if (frames[index]) return;
     const frame = new Image();
     frames[index] = frame;
     frame.onload = () => {
-      if (index === 0 || index === Math.round(currentFrame)) drawFrame(index);
+      if (isStatic()) {
+        if (index === 0) drawFrame(0);
+      } else if (index === 0 || index === Math.round(currentFrame)) {
+        drawFrame(index);
+      }
     };
-    frame.src = url;
-  });
+    frame.src = frameUrls[index];
+  }
+
+  function loadFramesForMode() {
+    if (isStatic()) loadFrame(0);
+    else frameUrls.forEach((_, index) => loadFrame(index));
+  }
+
+  loadFramesForMode();
   window.addEventListener('scroll', syncBackgroundScroll, { passive: true });
   window.addEventListener('resize', resizeBackground);
   new ResizeObserver(syncBackgroundScroll).observe(document.getElementById('scroll-container'));
-  reducedMotion.addEventListener('change', updateMotionPreference);
+  reducedMotion.addEventListener('change', updateBackgroundMode);
+  compactViewport.addEventListener('change', updateBackgroundMode);
   resizeBackground();
 }
