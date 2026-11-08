@@ -15,6 +15,8 @@ export function initBackground() {
   let targetFrame = 0;
   let animationId = null;
   let lastDrawnFrame = null;
+  let settleFirstFrame;
+  const firstFrameReady = new Promise(resolve => { settleFirstFrame = resolve; });
 
   function isStatic() {
     return reducedMotion.matches || compactViewport.matches;
@@ -83,7 +85,9 @@ export function initBackground() {
       } else if (index === 0 || index === Math.round(currentFrame)) {
         drawFrame(index);
       }
+      if (index === 0) settleFirstFrame(true);
     };
+    frame.onerror = () => { if (index === 0) settleFirstFrame(false); };
     frame.src = frameUrls[index];
   }
 
@@ -99,4 +103,5 @@ export function initBackground() {
   reducedMotion.addEventListener('change', updateBackgroundMode);
   compactViewport.addEventListener('change', updateBackgroundMode);
   resizeBackground();
+  return firstFrameReady;
 }

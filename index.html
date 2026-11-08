@@ -14,6 +14,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Akmal Rizki Anapu | Software &amp; Backend Development" />
   <meta name="twitter:description" content="Computer Science graduate focused on software and backend development. Explore my projects, technical contributions, and CV." />
+  <style>html { background: #090909; }</style>
   <link rel="stylesheet" href="/src/styles/index.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +22,148 @@
 </head>
 
 <body>
+  <div id="welcome-splash" class="welcome-splash" role="dialog" aria-modal="true" aria-labelledby="welcome-name" tabindex="-1" hidden>
+    <div class="welcome-content">
+      <p class="welcome-eyebrow">WELCOME TO MY PORTFOLIO</p>
+      <div class="welcome-name-mask"><p id="welcome-name" class="welcome-name">AKMAL</p></div>
+      <p class="welcome-subtitle">Software &amp; Backend Development</p>
+      <div class="welcome-line" aria-hidden="true"><span></span></div>
+    </div>
+  </div>
+  <!-- Inline startup runs before content without an extra blocking request. -->
+  <script>
+    // Early, homepage-only startup. Keep this classic script before page content.
+    (() => {
+      const overlay = document.getElementById('welcome-splash');
+      if (!overlay) return;
+      const root = document.documentElement;
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const type = performance.getEntriesByType('navigation')[0]?.type;
+      const previousRestoration = history.scrollRestoration;
+      let initialHash = location.hash;
+      let interacted = false;
+      let prepared = false;
+      let manualRestoration = false;
+      let closed = false;
+      let closing = false;
+      let safetyTimer;
+      let finishTimer;
+      let exitTimer;
+      const content = new Map();
+      let resolveClosed;
+      const closedPromise = new Promise(resolve => { resolveClosed = resolve; });
+      const startedAt = performance.now();
+
+      // Reload always starts at Home; incoming deep links use type "navigate".
+      // Clear only the reload fragment, before the browser parses its target.
+      if (type === 'reload' && initialHash) {
+        const state = history.state && typeof history.state === 'object' && !Array.isArray(history.state)
+          ? { ...history.state } : history.state;
+        if (state && typeof state === 'object' && !Array.isArray(state)) delete state.portfolioAnchor;
+        history.replaceState(state, '', location.pathname + location.search);
+        initialHash = '';
+      }
+      const resetHome = !initialHash && (type === 'navigate' || type === 'reload');
+      if (resetHome) {
+        history.scrollRestoration = 'manual';
+        manualRestoration = true;
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+
+      function restoreBrowserScroll() {
+        if (!manualRestoration) return;
+        history.scrollRestoration = previousRestoration;
+        manualRestoration = false;
+      }
+
+      function close(restoreFocus = false) {
+        if (closed) return;
+        closed = true;
+        clearTimeout(safetyTimer);
+        clearTimeout(finishTimer);
+        clearTimeout(exitTimer);
+        const hadFocus = overlay.contains(document.activeElement);
+        root.classList.remove('welcome-open');
+        content.forEach((wasInert, node) => { node.inert = wasInert; });
+        overlay.remove();
+        if (restoreFocus && hadFocus) document.querySelector('.navbar .logo')?.focus({ preventScroll: true });
+        resolveClosed();
+      }
+
+      function prepare() {
+        if (prepared) return;
+        prepared = true;
+        if (!closed) document.querySelectorAll('.navbar, #scroll-container').forEach(node => {
+          content.set(node, node.inert);
+          node.inert = true;
+        });
+        if (interacted || type === 'back_forward') return;
+        if (resetHome) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        else if (initialHash && location.hash === initialHash) {
+          let id;
+          try { id = decodeURIComponent(initialHash.slice(1)); } catch { return; }
+          // The existing Projects anchor is #work; accept the public-facing alias too.
+          const target = document.getElementById(id === 'projects' ? 'work' : id);
+          target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        }
+        window.dispatchEvent(new Event('scroll'));
+      }
+
+      function complete(readiness) {
+        if (closed || closing) return;
+        closing = true;
+        Promise.resolve(readiness).then(() => {
+          if (closed) return;
+          // Both real readiness and the full intro must be satisfied.
+          const tail = Math.max(0, 2500 - (performance.now() - startedAt));
+          finishTimer = setTimeout(() => {
+            overlay.classList.add('is-ready');
+            overlay.classList.add('is-leaving');
+            exitTimer = setTimeout(() => close(), 240);
+          }, tail);
+        }, () => close());
+      }
+
+      window.portfolioStartup = { prepare, complete, close, closed: closedPromise };
+      window.addEventListener('pageshow', event => {
+        // Persisted scroll may be restored after pageshow in this navigation task.
+        // Keep "manual" until it finishes; never force a late scroll after display.
+        if (event.persisted) restoreBrowserScroll();
+        else requestAnimationFrame(restoreBrowserScroll);
+      });
+      window.addEventListener('pagehide', () => { restoreBrowserScroll(); close(false); });
+      window.addEventListener('popstate', () => {
+        interacted = true;
+        restoreBrowserScroll();
+      });
+      const onInput = () => {
+        if (!closed) return;
+        interacted = true;
+      };
+      ['wheel', 'pointerdown', 'keydown'].forEach(event => window.addEventListener(event, onInput, { passive: true }));
+
+      let show = false;
+      try {
+        if (type === 'navigate' && !motion.matches && getComputedStyle(overlay).position === 'fixed' &&
+            sessionStorage.getItem('akmal.portfolio.welcome') !== 'seen') {
+          sessionStorage.setItem('akmal.portfolio.welcome', 'seen');
+          show = true;
+        }
+      } catch { /* Storage denied: skip the overlay instead of blocking access. */ }
+      if (!show) { close(false); return; }
+
+      root.classList.add('welcome-open');
+      overlay.hidden = false;
+      overlay.focus({ preventScroll: true });
+      window.addEventListener('keydown', event => {
+        if (!closed && event.key === 'Escape') close(true);
+      });
+      motion.addEventListener('change', () => { if (motion.matches) close(); });
+      // Independent of the module graph: failed/slow bootstrap cannot trap visitors.
+      safetyTimer = setTimeout(() => close(), 4000);
+    })();
+  </script>
+
   <!-- Original scroll-driven background animation -->
   <!-- include:src/components/background/background.html -->
 

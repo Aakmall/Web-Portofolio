@@ -1,0 +1,44 @@
+/* Homepage-only overlay; hidden HTML remains safe without JavaScript. */
+html { scrollbar-gutter: stable; }
+html.welcome-open { overflow: hidden; }
+.welcome-open .navbar,
+.welcome-open #scroll-container { visibility: hidden; }
+.welcome-splash[hidden] { display: none; }
+.welcome-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: #090909;
+  color: #e9e9e9;
+  text-align: center;
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.16, 1, .3, 1);
+}
+.welcome-content { width: min(100%, 560px); }
+.welcome-eyebrow { color: #aaa; font-size: clamp(12px, 1.2vw, 14px); letter-spacing: .18em; }
+.welcome-name-mask { overflow: hidden; margin: 20px 0 16px; }
+.welcome-name { font-size: clamp(44px, 8.5vw, 80px); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; }
+.welcome-subtitle { color: #aaa; font-size: clamp(14px, 1.5vw, 18px); }
+.welcome-line { width: min(200px, 60%); height: 1px; margin: 28px auto 0; overflow: hidden; background: #292929; }
+.welcome-line span { display: block; width: 45%; height: 100%; background: #ff792d; }
+.welcome-splash.is-ready .welcome-line span { animation-play-state: paused; opacity: 0; }
+.welcome-splash.is-leaving { opacity: 0; transform: translateY(-10px); }
+@keyframes welcome-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes welcome-line {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(330%); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .welcome-eyebrow { animation: welcome-rise 440ms cubic-bezier(.16, 1, .3, 1) backwards; }
+  .welcome-name { animation: welcome-rise 600ms cubic-bezier(.16, 1, .3, 1) 60ms backwards; }
+  .welcome-subtitle { animation: welcome-rise 480ms cubic-bezier(.16, 1, .3, 1) 140ms backwards; }
+  .welcome-line span { animation: welcome-line 1200ms ease-in-out infinite; transition: opacity 140ms ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcome-splash { display: none; transition: none; }
+}

@@ -1,0 +1,43 @@
+/* Finite, opt-in effects: unenhanced content is never hidden. */
+@keyframes motion-rise {
+  from { opacity: 0; transform: translateY(var(--motion-y, 18px)); }
+  to { opacity: var(--motion-opacity, 1); transform: translateY(0); }
+}
+
+@keyframes motion-mask-rise {
+  from { opacity: 0; transform: translateY(var(--motion-y, 28px)); clip-path: inset(100% 0 0); }
+  to { opacity: var(--motion-opacity, 1); transform: translateY(0); clip-path: inset(0); }
+}
+
+@keyframes motion-name-rise {
+  from { opacity: 0; transform: translateY(var(--motion-y, 32px)); clip-path: inset(100% 0 0); }
+  to { opacity: var(--name-scroll-opacity, 1); transform: translateY(0); clip-path: inset(0); }
+}
+
+@keyframes motion-depth {
+  from { opacity: 0; transform: translateY(var(--motion-y, 22px)) scale(.985); }
+  to { opacity: var(--motion-opacity, 1); transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-enter {
+    animation: motion-rise var(--motion-duration, 540ms) cubic-bezier(.22, 1, .36, 1) var(--motion-delay, 0ms) backwards;
+  }
+  .motion-enter.motion-mask { animation-name: motion-mask-rise; }
+  .motion-enter.motion-name { animation-name: motion-name-rise; }
+  .motion-enter.motion-depth { animation-name: motion-depth; }
+  .motion-enter:focus-within,
+  .project-card:focus-within .motion-enter { animation: none; }
+}
+
+@media (min-width: 1001px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-section .project-card { transition: transform 320ms cubic-bezier(.22, 1, .36, 1); }
+  .work-section .project-cover { transition: border-color 280ms ease, box-shadow 320ms ease; }
+  .work-section .project-cover img { transition: transform 420ms cubic-bezier(.22, 1, .36, 1); }
+  .work-section .project-card:not(.motion-enter):hover { transform: translateY(-4px); }
+  .work-section .project-card:hover .project-cover {
+    border-color: #dc3038;
+    box-shadow: 0 8px 24px rgb(220 48 56 / 12%);
+  }
+  .work-section .project-card:hover .project-cover img { transform: scale(1.015); }
+}

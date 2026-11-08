@@ -1,6 +1,7 @@
 import { initNavigation } from './components/navigation/navigation.js';
 import { initBackground } from './components/background/background.js';
 import { initHero } from './sections/hero/hero.js';
+import { initMotion } from './motion.js';
 import { initProjects } from './sections/work/work.js';
 
 // Vite assembles sections at build time. Static servers need this fallback.
@@ -22,13 +23,25 @@ async function loadSectionPartials() {
 
 async function initPortfolio() {
   await loadSectionPartials();
-  initHero();
+  const startup = window.portfolioStartup;
   initProjects();
   initNavigation();
-  initBackground();
+  startup?.prepare();
+  initHero();
+  const firstFrameReady = initBackground();
+  const fontsReady = document.fonts ? Promise.allSettled([
+    document.fonts.load('400 16px Inter'),
+    document.fonts.load('600 16px Inter'),
+  ]) : Promise.resolve();
+  if (startup) {
+    startup.complete(Promise.allSettled([firstFrameReady, fontsReady]));
+    await startup.closed;
+  }
+  initMotion();
 }
 
 initPortfolio().catch(error => {
+  window.portfolioStartup?.close();
   console.error('Portfolio initialization failed:', error);
   const message = document.createElement('p');
   message.textContent = 'Halaman gagal dimuat. Jalankan npm run dev, lalu buka http://127.0.0.1:3000.';

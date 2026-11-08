@@ -9,3 +9,5 @@
 @import "../../src/components/background/background.css";
 
 @import "./reading-cards.css";
+@import "./motion.css";
+@import "./welcome.css";
