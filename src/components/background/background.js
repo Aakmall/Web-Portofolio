@@ -27,9 +27,16 @@ export function initBackground() {
     // Keep the last available portrait while a requested frame is still loading.
     const frame = requestedFrame?.complete && requestedFrame.naturalWidth ? requestedFrame : lastDrawnFrame;
     if (!frame || !frame.complete || !frame.naturalWidth) return;
-    const scale = Math.max(canvas.width / frame.naturalWidth, canvas.height / frame.naturalHeight);
+    const coverScale = Math.max(canvas.width / frame.naturalWidth, canvas.height / frame.naturalHeight);
+    // Give the static compact portrait more breathing room; keep desktop cover unchanged.
+    const scale = coverScale * (compactViewport.matches ? 0.85 : 1);
     const width = frame.naturalWidth * scale;
     const height = frame.naturalHeight * scale;
+    if (compactViewport.matches) {
+      // Repaint the exposed area so a previous, larger draw cannot remain visible.
+      ctx.fillStyle = '#090909';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
     ctx.drawImage(frame, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
     lastDrawnFrame = frame;
   }
